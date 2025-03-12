@@ -13,7 +13,7 @@ services:
       QDRANT__LOG_LEVEL: "INFO"
 
   indexer:
-    image: lcas.lincolnac.uk/lcas/minima-semantic-indexer:latest
+    image: lcas.lincoln.ac.uk/lcas/minima-semantic-indexer:latest
     restart: unless-stopped
     build: 
       context: ./indexer
