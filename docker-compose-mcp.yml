@@ -13,7 +13,7 @@ services:
       QDRANT__LOG_LEVEL: "INFO"
 
   indexer:
-    image: lcas.lincolnac.uk/lcas/minima-semantic-indexer:latest
+    image: lcas.lincoln.ac.uk/lcas/minima-semantic-indexer:latest
     restart: unless-stopped
     build: 
       context: ./indexer
@@ -24,13 +24,15 @@ services:
     volumes:
       - files:/usr/src/app/local_files/
       - ./indexer:/usr/src/app
+      - ./indexer_data:/indexer/storage
+    ports:
+      - 8001:8000
     environment:
       - PYTHONPATH=/usr/src
       - PYTHONUNBUFFERED=TRUE
       - LOCAL_FILES_PATH=${LOCAL_FILES_PATH}
       - EMBEDDING_MODEL_ID=${EMBEDDING_MODEL_ID}
       - EMBEDDING_SIZE=${EMBEDDING_SIZE}
-      - START_INDEXING=${START_INDEXING}
       - CONTAINER_PATH=/usr/src/app/local_files/
     env_file:
       - .env
